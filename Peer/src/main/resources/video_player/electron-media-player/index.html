@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>HLS Player</title>
+  <style>
+    html, body {
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        background: black;
+    }
+    #video {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        background-color: black;
+    }
+  </style>
+</head>
+<body>
+  <video id="video" controls></video>
+
+  <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const hostname = params.get('hostname');
+    const videoId = params.get('videoId');
+
+    if (!hostname || !videoId) {
+      console.error('Missing hostname or videoId');
+    } else {
+      const videoSrc = `http://${hostname}:8000/video/playlist.m3u8?videoId=${videoId}`;
+      const video = document.getElementById('video');
+
+      if (Hls.isSupported()) {
+        const hls = new Hls();
+        hls.loadSource(videoSrc);
+        hls.attachMedia(video);
+        hls.on(Hls.Events.MANIFEST_PARSED, () => {
+          video.play();
+        });
+      } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
+        video.src = videoSrc;
+        video.addEventListener('loadedmetadata', () => {
+          video.play();
+        });
+      } else {
+        console.error('HLS not supported');
+      }
+    }
+  </script>
+</body>
+</html>

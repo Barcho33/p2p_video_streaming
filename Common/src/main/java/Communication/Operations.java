@@ -1,0 +1,14 @@
+package Communication;
+
+public enum Operations {
+    LOGIN,
+    REGISTER,
+    VERIFY_USER_EXISTS,
+    FETCH_USER,
+    PEER_HANDSHAKE,
+    UPLOAD_VIDEO,
+    FETCH_ALL_VIDEOS,
+    FETCH_PEER_IPS,
+    UPDATE_VIDEO_METADATA
+
+}
