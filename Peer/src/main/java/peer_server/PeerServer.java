@@ -28,7 +28,7 @@ public class PeerServer {
         private static final int PORT = 8000;
         private static Socket client;
         private static ConcurrentHashMap<String, List<String>> peerIps = new ConcurrentHashMap<>();
-        private static final InetSocketAddress hostAddress = new InetSocketAddress("192.168.1.101", PORT); //temp
+        private static final InetSocketAddress hostAddress = new InetSocketAddress("localhost", PORT); //temp
 
 
     public static HttpServer startServer(Socket socket){

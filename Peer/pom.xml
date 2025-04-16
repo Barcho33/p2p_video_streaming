@@ -15,7 +15,6 @@
 <junit.version>5.10.0</junit.version>  </properties>
 
   <dependencies>
-    <!-- https://mvnrepository.com/artifact/org.xerial/sqlite-jdbc -->
 
     <dependency>
       <groupId>org.slf4j</groupId>
@@ -35,28 +34,6 @@
         <artifactId>sqlite-jdbc</artifactId>
         <version>3.47.2.0</version>
       </dependency>
-
-
-    <!-- https://mvnrepository.com/artifact/uk.co.caprica/vlcj-natives -->
-    <dependency>
-      <groupId>uk.co.caprica</groupId>
-      <artifactId>vlcj-natives</artifactId>
-      <version>4.8.0</version>
-    </dependency>
-
-    <!-- Zavisi od vlcj-a za JavaFX -->
-    <dependency>
-      <groupId>uk.co.caprica</groupId>
-      <artifactId>vlcj-javafx</artifactId>
-      <version>1.2.0</version> <!-- Ako želiš verziju 4.6.2, možeš koristiti i noviju ako je dostupna -->
-    </dependency>
-
-    <!-- Zavisi od vlcj-a (osnovna zavisnost bez JavaFX integracije) -->
-    <dependency>
-      <groupId>uk.co.caprica</groupId>
-      <artifactId>vlcj</artifactId>
-      <version>4.8.0</version> <!-- Prilagodi verziju ako je potrebno -->
-    </dependency>
 
     <dependency>
       <groupId>org.openjfx</groupId>
@@ -127,7 +104,8 @@
           <artifactId>*</artifactId>
         </exclusion>
       </exclusions>
-    </dependency><dependency>
+    </dependency>
+      <dependency>
       <groupId>com.github.almasb</groupId>
       <artifactId>fxgl</artifactId>
       <version>17.3</version>

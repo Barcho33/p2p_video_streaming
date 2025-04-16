@@ -15,7 +15,7 @@ public class ClientApp extends Application {
 
     private static final String TRACKER_ADDRESS = "localhost";
     private static final int PORT = 8004;
-    private static final String HOSTNAME = "192.168.1.101";
+    private static final String HOSTNAME = "localhost";
 
     @Override
     public void start(Stage primaryStage){
