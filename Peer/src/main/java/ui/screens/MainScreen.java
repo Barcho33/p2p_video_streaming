@@ -11,6 +11,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import logic.screen.MainScreenService;
@@ -62,6 +63,7 @@ public class MainScreen {
     @FXML private TextField txt_video_title;
     @FXML private ListView<Video> videoList;
     @FXML private TextField txtSearch;
+    @FXML private VBox vbVideoList;
 
     @FXML
     private void handlePlay() throws SQLException {
@@ -170,9 +172,16 @@ public class MainScreen {
     private void updateVideoList() throws Exception {
 
         listOfVideos = MainScreenService.getAllVideos(this.clientSocket);
-        ObservableList<Video> videos = FXCollections.observableArrayList(listOfVideos);
+        //ObservableList<Video> videos = FXCollections.observableArrayList(listOfVideos);
 
-        videoList.setItems(videos);
+        //videoList.setItems(videos);
+
+        VideoContainer vc = new VideoContainer();
+        for(Video video : listOfVideos){
+            System.out.println(video.getVideoTitle());
+            if(video.getVideoTitle() != null)
+                vbVideoList.getChildren().add(vc.getContainer(video.getVideoTitle()));
+        }
 
     }
 

@@ -1,15 +1,63 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.Stop?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="285.0" prefWidth="601.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.screens.LoginScreen">
+<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="788.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.screens.LoginScreen">
    <children>
-      <Button fx:id="btn_login" layoutX="144.0" layoutY="154.0" mnemonicParsing="false" onAction="#handleLogin" prefHeight="57.0" prefWidth="147.0" text="Login" />
-      <Button fx:id="btn_quit" layoutX="312.0" layoutY="154.0" mnemonicParsing="false" onAction="#handleQuit" prefHeight="57.0" prefWidth="147.0" text="Quit" />
-      <Label layoutX="48.0" layoutY="96.0" prefHeight="23.0" prefWidth="110.0" text="Username:" />
-      <TextField fx:id="txt_username" layoutX="168.0" layoutY="96.0" prefHeight="24.0" prefWidth="288.0" />
+      <ImageView fx:id="logo" fitHeight="403.0" fitWidth="417.0" pickOnBounds="true" preserveRatio="true">
+         <HBox.margin>
+            <Insets />
+         </HBox.margin>
+      </ImageView>
+      <AnchorPane prefHeight="400.0" prefWidth="371.0" style="-fx-background-color: #FEFEFE;">
+         <children>
+            <Button fx:id="btnNext" layoutX="93.0" layoutY="284.0" mnemonicParsing="false" onAction="#handleLogin" onMouseEntered="#handleHoverIn" onMouseExited="#handleHoverOut" prefHeight="48.0" prefWidth="185.0" style="-fx-background-color: linear-gradient(to right, #a4508b, #5f0a87); -fx-background-radius: 20;" text="Next" textFill="WHITE">
+               <font>
+                  <Font name="Ubuntu Mono" size="16.0" />
+               </font></Button>
+            <Label layoutX="35.0" layoutY="59.0" prefHeight="48.0" prefWidth="302.0" text="Welcome to Nucleus Stream" textAlignment="CENTER">
+               <font>
+                  <Font name="Ubuntu Mono Bold" size="24.0" />
+               </font>
+               <textFill>
+                  <LinearGradient endX="0.4142857142857143" endY="1.0" startX="0.14761904761904762" startY="0.30952380952380953">
+                     <stops>
+                        <Stop>
+                           <color>
+                              <Color red="0.6431372761726379" green="0.3137255012989044" blue="0.545098066329956" />
+                           </color>
+                        </Stop>
+                        <Stop offset="0.006711409395973154">
+                           <color>
+                              <Color red="0.6431372761726379" green="0.3137255012989044" blue="0.545098066329956" />
+                           </color>
+                        </Stop>
+                        <Stop offset="1.0">
+                           <color>
+                              <Color red="0.37254902720451355" green="0.03921568766236305" blue="0.529411792755127" />
+                           </color>
+                        </Stop>
+                     </stops>
+                  </LinearGradient>
+               </textFill>
+            </Label>
+            <Label layoutX="47.0" layoutY="158.0" prefHeight="36.0" prefWidth="258.0" text="Enter username:" textAlignment="CENTER" textFill="#d94feb">
+               <font>
+                  <Font name="Ubuntu Mono Bold" size="18.0" />
+               </font>
+            </Label>
+            <TextField fx:id="txtUsername" layoutX="47.0" layoutY="200.0" prefHeight="36.0" prefWidth="268.0" style="-fx-background-radius: 20;" />
+         </children>
+      </AnchorPane>
    </children>
-</AnchorPane>
+</HBox>

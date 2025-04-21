@@ -5,7 +5,11 @@ import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import logic.screen.LoginScreenService;
 import logic.screen.ScreenUtils;
@@ -13,6 +17,7 @@ import metadata.SQLiteManager;
 
 
 import java.net.Socket;
+import java.nio.file.Path;
 
 public class LoginScreen {
 
@@ -22,16 +27,34 @@ public class LoginScreen {
     public void initialize(Stage stage, Socket clientSocket) {
         this.clientSocket = clientSocket;
         this.stage = stage;
+        this.logo.setImage(new Image(getClass().getResource("/images/logo.png").toExternalForm()));
 
         stage.setResizable(false);
     }
 
     @FXML
-    private TextField txt_username;
-
+    private TextField txtUsername;
+    @FXML
+    private Button btnNext;
+    @FXML
+    private ImageView logo;
+    @FXML
+    private void handleHoverIn(){
+        String currentStyle = btnNext.getStyle();
+        String updatedStyle = currentStyle.replaceAll(  "-fx-background-color:.*?;",
+                "-fx-background-color: linear-gradient(to right, #ff8c42, #5fd3e5);");
+        btnNext.setStyle(updatedStyle);
+    }
+    @FXML
+    private void handleHoverOut(){
+        String currentStyle = btnNext.getStyle();
+        String updatedStyle = currentStyle.replaceAll(  "-fx-background-color:.*?;",
+                "-fx-background-color: linear-gradient(to right, #a4508b, #5f0a87);");
+        btnNext.setStyle(updatedStyle);
+    }
     @FXML
     private void handleLogin() {
-        String username = txt_username.getText();
+        String username = txtUsername.getText();
 
         try {
             if(LoginScreenService.checkUsername(username, clientSocket))
