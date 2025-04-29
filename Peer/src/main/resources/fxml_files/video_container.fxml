@@ -1,13 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ProgressBar?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-
-<HBox fx:id="videoContainer" alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="155.0" prefWidth="733.0" spacing="10.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.screens.VideoContainer">
+<HBox fx:id="videoContainer" alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#handleVideoPlayer" onMouseEntered="#handleHoverIn" onMouseExited="#handleHoverOut" prefHeight="318.0" prefWidth="1675.0" spacing="10.0" style="-fx-background-color: e2e2e2;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.screens.VideoContainer">
    <children>
-      <ImageView fx:id="videoImage" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
-      <Label fx:id="videoTitle" text="TEST" />
+      <ImageView fx:id="videoImage" fitHeight="318.0" fitWidth="477.0" pickOnBounds="true" preserveRatio="true" />
+      <VBox prefHeight="318.0" prefWidth="1313.0">
+         <children>
+            <Label fx:id="videoTitle" text="Label">
+               <VBox.margin>
+                  <Insets bottom="50.0" top="50.0" />
+               </VBox.margin>
+               <font>
+                  <Font name="Ubuntu Mono" size="36.0" />
+               </font>
+            </Label>
+            <ProgressBar fx:id="progressBar" prefHeight="20.0" prefWidth="1000.0" progress="0.0">
+               <VBox.margin>
+                  <Insets left="10.0" top="100.0" />
+               </VBox.margin>
+            </ProgressBar>
+         </children>
+      </VBox>
    </children>
 </HBox>

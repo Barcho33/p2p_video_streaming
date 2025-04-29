@@ -5,100 +5,77 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="576.0" prefWidth="765.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.screens.MainScreen">
-   <top>
-      <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="10.0" BorderPane.alignment="CENTER">
+<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="753.0" prefWidth="1196.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.screens.MainScreen">
+   <children>
+      <VBox alignment="TOP_CENTER" prefHeight="746.0" prefWidth="246.0" style="-fx-background-color: linear-gradient(to right, #a4508b, #5f0a87);">
          <children>
-            <Label text="Import video file:" textAlignment="CENTER">
-               <font>
-                  <Font size="16.0" />
-               </font>
-            </Label>
-            <Button fx:id="btn_choose_file" mnemonicParsing="false" onAction="#handleChooseFile" prefHeight="26.0" prefWidth="141.0" text="choose file" />
-            <Button fx:id="btn_upload" mnemonicParsing="false" onAction="#handleUpload" prefHeight="26.0" prefWidth="141.0" text="upload" />
-         </children>
-         <padding>
-            <Insets left="10.0" />
-         </padding>
-      </HBox>
-   </top>
-   <right>
-      <VBox prefHeight="376.0" prefWidth="346.0" BorderPane.alignment="CENTER">
-         <padding>
-            <Insets right="10.0" />
-         </padding>
-      </VBox>
-   </right>
-   <bottom>
-      <HBox alignment="TOP_CENTER" nodeOrientation="LEFT_TO_RIGHT" prefHeight="371.0" prefWidth="765.0" spacing="5.0" BorderPane.alignment="CENTER_RIGHT">
-         <children>
-            <VBox alignment="TOP_CENTER" prefHeight="90.0" prefWidth="616.0">
-               <children>
-                  <Label text="Search:">
-                     <font>
-                        <Font size="16.0" />
-                     </font>
-                  </Label>
-                  <TextField fx:id="txtSearch" onKeyReleased="#searchForVideo" />
-                  <ScrollPane fx:id="scrollContainer" prefHeight="271.0" prefWidth="616.0">
-                     <content>
-                        <VBox fx:id="vbVideoList" prefHeight="274.0" prefWidth="608.0" />
-                     </content>
-                  </ScrollPane>
-                  <Button fx:id="btn_play" mnemonicParsing="false" onAction="#handlePlay" prefHeight="35.0" prefWidth="131.0" text="play video" />
-               </children>
-            </VBox>
-         </children>
-         <padding>
-            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-         </padding>
-         <BorderPane.margin>
-            <Insets top="10.0" />
-         </BorderPane.margin>
-      </HBox>
-   </bottom>
-   <left>
-      <VBox prefHeight="105.0" prefWidth="757.0" BorderPane.alignment="CENTER">
-         <children>
-            <Label fx:id="lbl_file_name" prefHeight="20.0" prefWidth="757.0" text="File name:">
-               <font>
-                  <Font size="16.0" />
-               </font>
-            </Label>
-            <Label fx:id="lbl_file_path" prefHeight="20.0" prefWidth="752.0" text="File path:">
-               <font>
-                  <Font size="16.0" />
-               </font>
-            </Label>
-            <Label fx:id="lbl_file_size" prefHeight="20.0" prefWidth="894.0" text="File size:">
-               <font>
-                  <Font size="16.0" />
-               </font>
-            </Label>
-            <Label fx:id="lbl_uploader" prefHeight="20.0" prefWidth="751.0" text="Uploader:">
-               <font>
-                  <Font size="16.0" />
-               </font>
-            </Label>
-            <Label fx:id="lbl_video_title" layoutX="20.0" layoutY="70.0" prefHeight="20.0" prefWidth="751.0" text="Video title:">
-               <font>
-                  <Font size="16.0" />
-               </font>
-            </Label>
-            <TextField fx:id="txt_video_title" prefHeight="24.0" prefWidth="588.0">
+            <ImageView fx:id="imgLogo" fitHeight="180.0" fitWidth="203.0" pickOnBounds="true" preserveRatio="true">
                <VBox.margin>
-                  <Insets right="550.0" />
+                  <Insets right="5.0" />
                </VBox.margin>
-            </TextField>
+            </ImageView>
+            <Label fx:id="lblHome" prefHeight="36.0" prefWidth="74.0" text="HOME" textFill="WHITE">
+               <font>
+                  <Font name="Ubuntu Mono Bold" size="32.0" />
+               </font>
+               <VBox.margin>
+                  <Insets bottom="20.0" />
+               </VBox.margin>
+            </Label>
+            <Label fx:id="lblMyVideos" prefHeight="34.0" prefWidth="171.0" text="MY VIDEOS" textFill="WHITE">
+               <font>
+                  <Font name="Ubuntu Mono Bold" size="32.0" />
+               </font>
+               <VBox.margin>
+                  <Insets bottom="20.0" />
+               </VBox.margin>
+               <padding>
+                  <Insets left="5.0" />
+               </padding>
+            </Label>
+            <Label fx:id="lblUploadVideo" prefHeight="34.0" prefWidth="197.0" text="UPLOAD VIDEO" textFill="WHITE">
+               <font>
+                  <Font name="Ubuntu Mono Bold" size="32.0" />
+               </font>
+            </Label>
          </children>
-         <padding>
-            <Insets left="10.0" />
-         </padding>
       </VBox>
-   </left>
-</BorderPane>
+      <VBox prefHeight="746.0" prefWidth="950.0" HBox.hgrow="ALWAYS">
+         <children>
+            <HBox minHeight="-Infinity" minWidth="-Infinity" prefHeight="85.0" prefWidth="949.0" VBox.vgrow="NEVER">
+               <children>
+                  <TextField fx:id="txtSearch" prefHeight="35.0" prefWidth="527.0" style="-fx-background-radius: 20;">
+                     <HBox.margin>
+                        <Insets left="20.0" top="25.0" />
+                     </HBox.margin>
+                  </TextField>
+                  <Button fx:id="btnSearch" mnemonicParsing="false" prefHeight="45.0" prefWidth="143.0" style="-fx-background-color: linear-gradient(to right, #a4508b, #5f0a87); -fx-background-radius: 20;" text="Search" textFill="WHITE">
+                     <HBox.margin>
+                        <Insets left="20.0" top="20.0" />
+                     </HBox.margin>
+                     <font>
+                        <Font name="Ubuntu Mono" size="19.0" />
+                     </font>
+                  </Button>
+               </children>
+               <HBox.margin>
+                  <Insets left="20.0" top="23.0" />
+               </HBox.margin>
+            </HBox>
+            <ScrollPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="668.0" prefWidth="949.0" VBox.vgrow="ALWAYS">
+               <content>
+                  <VBox fx:id="videoBox" prefHeight="663.0" prefWidth="945.0" spacing="15.0">
+                     <padding>
+                        <Insets top="15.0" />
+                     </padding></VBox>
+               </content>
+            </ScrollPane>
+         </children>
+      </VBox>
+   </children>
+</HBox>

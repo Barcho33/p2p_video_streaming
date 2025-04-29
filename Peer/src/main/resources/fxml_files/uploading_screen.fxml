@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.Stop?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="497.0" prefWidth="943.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Label layoutX="357.0" layoutY="38.0" prefHeight="48.0" prefWidth="230.0" text="VIDEO UPLOADING">
+         <font>
+            <Font name="Ubuntu Mono Bold" size="30.0" />
+         </font>
+         <textFill>
+            <LinearGradient endX="1.0" endY="1.0">
+               <stops>
+                  <Stop>
+                     <color>
+                        <Color red="0.37254902720451355" green="0.03921568766236305" blue="0.529411792755127" />
+                     </color>
+                  </Stop>
+                  <Stop offset="1.0">
+                     <color>
+                        <Color red="0.6431372761726379" green="0.3137255012989044" blue="0.545098066329956" />
+                     </color>
+                  </Stop>
+               </stops>
+            </LinearGradient>
+         </textFill>
+      </Label>
+      <Label layoutX="39.0" layoutY="196.0" prefHeight="25.0" prefWidth="116.0" text="File name:" textFill="#d94feb">
+         <font>
+            <Font name="Ubuntu Mono Bold" size="19.0" />
+         </font>
+      </Label>
+      <Label layoutX="39.0" layoutY="221.0" prefHeight="25.0" prefWidth="116.0" text="File path:" textFill="#d94feb">
+         <font>
+            <Font name="Ubuntu Mono Bold" size="19.0" />
+         </font>
+      </Label>
+      <Label layoutX="39.0" layoutY="246.0" prefHeight="25.0" prefWidth="116.0" text="Size:" textFill="#d94feb">
+         <font>
+            <Font name="Ubuntu Mono Bold" size="19.0" />
+         </font>
+      </Label>
+      <Label layoutX="39.0" layoutY="115.0" prefHeight="25.0" prefWidth="183.0" text="Import video file:" textFill="#d94feb">
+         <font>
+            <Font name="Ubuntu Mono Bold" size="19.0" />
+         </font>
+      </Label>
+      <Label layoutX="39.0" layoutY="140.0" prefHeight="25.0" prefWidth="116.0" text="Video title:" textFill="#d94feb">
+         <font>
+            <Font name="Ubuntu Mono Bold" size="19.0" />
+         </font>
+      </Label>
+      <TextField fx:id="txtVideoTitle" layoutX="39.0" layoutY="165.0" prefHeight="24.0" prefWidth="246.0" style="-fx-background-radius: 20;" />
+      <Button fx:id="btnChoose" layoutX="220.0" layoutY="114.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="131.0" style="-fx-background-radius: 20; -fx-background-color: linear-gradient(to right, #a4508b, #5f0a87);" text="Choose" textFill="WHITE">
+         <font>
+            <Font name="Ubuntu Mono Bold" size="16.0" />
+         </font>
+      </Button>
+      <Button fx:id="btnUpload" layoutX="259.0" layoutY="383.0" mnemonicParsing="false" prefHeight="61.0" prefWidth="197.0" style="-fx-background-radius: 20; -fx-background-color: linear-gradient(to right, #a4508b, #5f0a87);" text="Upload" textFill="WHITE">
+         <font>
+            <Font name="Ubuntu Mono Bold" size="16.0" />
+         </font>
+      </Button>
+      <Button fx:id="btnExit" layoutX="489.0" layoutY="383.0" mnemonicParsing="false" prefHeight="61.0" prefWidth="197.0" style="-fx-background-radius: 20; -fx-background-color: linear-gradient(to right, #a4508b, #5f0a87);" text="Exit" textFill="WHITE">
+         <font>
+            <Font name="Ubuntu Mono Bold" size="16.0" />
+         </font>
+      </Button>
+      <Label layoutX="555.0" layoutY="115.0" prefHeight="25.0" prefWidth="346.0" text="Import thumbnail image (optional):" textFill="#d94feb">
+         <font>
+            <Font name="Ubuntu Mono Bold" size="19.0" />
+         </font>
+      </Label>
+      <Label fx:id="lblPath" layoutX="137.0" layoutY="222.0" prefHeight="24.0" prefWidth="409.0" text="lblPath">
+         <font>
+            <Font name="Ubuntu Mono Bold Italic" size="13.0" />
+         </font>
+      </Label>
+      <Pane layoutX="555.0" layoutY="149.0" prefHeight="200.0" prefWidth="339.0" style="-fx-border-color: #8DFFD1; -fx-border-width: 5;">
+         <children>
+            <ImageView fx:id="imgImport" fitHeight="206.0" fitWidth="330.0" layoutX="5.0">
+               <image>
+                  <Image url="@image-removebg-preview(1).png" />
+               </image>
+            </ImageView>
+         </children>
+      </Pane>
+      <Label fx:id="lblSize" layoutX="137.0" layoutY="247.0" prefHeight="24.0" prefWidth="409.0" text="lblSize">
+         <font>
+            <Font name="Ubuntu Mono Bold Italic" size="13.0" />
+         </font>
+      </Label>
+      <Label fx:id="lblName" layoutX="137.0" layoutY="197.0" prefHeight="24.0" prefWidth="409.0" text="lblName">
+         <font>
+            <Font name="Ubuntu Mono Bold Italic" size="13.0" />
+         </font>
+      </Label>
+      <Label layoutX="39.0" layoutY="271.0" prefHeight="25.0" prefWidth="116.0" text="Uploader:" textFill="#d94feb">
+         <font>
+            <Font name="Ubuntu Mono Bold" size="19.0" />
+         </font>
+      </Label>
+      <Label fx:id="lblUploader" layoutX="137.0" layoutY="272.0" prefHeight="24.0" prefWidth="409.0" text="lblUploader">
+         <font>
+            <Font name="Ubuntu Mono Bold Italic" size="13.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

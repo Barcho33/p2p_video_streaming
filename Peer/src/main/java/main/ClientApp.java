@@ -31,7 +31,7 @@ public class ClientApp extends Application {
             SQLiteManager.createTables();
 
             if(SQLiteManager.userExists())
-                MainScreenService.showScreen(primaryStage, "NUCLEUSTREAM", clientSocket);
+                MainScreenService.showScreen(primaryStage, "", clientSocket);
             else
                 LoginScreenService.showScreen(primaryStage, clientSocket);
 

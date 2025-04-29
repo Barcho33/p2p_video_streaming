@@ -2,31 +2,28 @@ package ui.screens;
 
 import com.sun.net.httpserver.HttpServer;
 import domain.Video;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import domain.User;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
-import javafx.scene.control.TextField;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.control.*;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import logic.screen.MainScreenService;
 import logic.screen.ScreenUtils;
-import metadata.SQLiteManager;
+import org.w3c.dom.Node;
+import org.w3c.dom.events.MouseEvent;
 import peer_server.PeerServer;
 import peer_server.PeerTrackerCommunication;
 
 
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.InputStreamReader;
+import java.io.IOException;
 import java.net.Socket;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
 public class MainScreen {
@@ -38,6 +35,20 @@ public class MainScreen {
     private File selectedFile;
     private HttpServer peerServer;
     private static List<Video> listOfVideos;
+    @FXML
+    private Button btnSearch;
+    @FXML
+    private TextField txtSearch;
+    @FXML
+    private VBox videoBox;
+    @FXML
+    private Label lblHome;
+    @FXML
+    private Label lblMyVideos;
+    @FXML
+    private Label lblUploadVideo;
+    @FXML
+    private ImageView imgLogo;
 
     public void initialize(Stage stage, Socket clientSocket, User user) {
         try {
@@ -45,186 +56,47 @@ public class MainScreen {
             this.clientSocket = clientSocket;
             this.user = user;
             this.peerServer = PeerServer.startServer(clientSocket);
+            this.imgLogo.setImage(new Image(getClass().getResource("/images/transparent-logo.png").toExternalForm()));
             PeerTrackerCommunication.getInstance().initSocket(clientSocket);
             stage.setOnCloseRequest(windowEvent -> {
                 PeerServer.stopServer(peerServer);
                 System.exit(0);
             });
-            stage.setResizable(false);
+
             updateVideoList();
+
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
-    }
-    @FXML private Label lbl_file_name;
-    @FXML private Label lbl_uploader;
-    @FXML private Label lbl_file_path;
-    @FXML private Label lbl_file_size;
-    @FXML private TextField txt_video_title;
-    @FXML private ListView<Video> videoList;
-    @FXML private TextField txtSearch;
-    @FXML private VBox vbVideoList;
-
-    @FXML
-    private void handlePlay() throws SQLException {
-
-      Video video = videoList.getSelectionModel().getSelectedItem();
-
-      if(video == null){
-          ScreenUtils.showDialogMessage("Video", null, "You must select video!", Alert.AlertType.ERROR);
-          return;
-      }
-
-      openVideoPlayer(clientSocket.getInetAddress().getHostName(), video.getVideoId());
-      SQLiteManager.insertVideoData(video);
-    }
-    @FXML
-    private void handleChooseFile(){
-        openVideoFile();
-    }
-    @FXML
-    private void searchForVideo(){
-        if(txtSearch.getText().isEmpty()){
-            ObservableList<Video> videos = FXCollections.observableArrayList(listOfVideos);
-            videoList.setItems(videos);
-            return;
-        }
-        List<Video> vl = new ArrayList<>();
-        for(Video video : listOfVideos) {
-            if (video.getVideoTitle().toLowerCase()
-                    .contains(txtSearch.getText().toLowerCase()))
-                vl.add(video);
-            }
-            ObservableList<Video> videos = FXCollections.observableArrayList(vl);
-            videoList.setItems(videos);
-        }
-
-    @FXML
-    private void handleUpload(){
-
-        if(selectedFile == null){
-            ScreenUtils.showDialogMessage("Video file", null, "You must choose video file!", Alert.AlertType.ERROR);
-            return;
-        }
-        if(txt_video_title == null || txt_video_title.getText().isEmpty()){
-            ScreenUtils.showDialogMessage("Video title", null, "You must name your video title!", Alert.AlertType.ERROR);
-            return;
-        }
-
-
-        Video uploadedVideo = MainScreenService.uploadVideo(selectedFile, txt_video_title.getText(), this.user.getUsername(), this.stage);
-        if(uploadedVideo == null){
-            ScreenUtils.showDialogMessage("Upload video", null, "Video is not uploaded successfully!", Alert.AlertType.ERROR);
-            return;
-        }
-        try {
-            if (SQLiteManager.insertUploadedVideo(uploadedVideo) && MainScreenService.sendVideoToTracker(uploadedVideo, this.clientSocket)){
-                ScreenUtils.showDialogMessage("Upload video", null, "Video is successfully uploaded!", Alert.AlertType.INFORMATION);
-            }
-            else
-                ScreenUtils.showDialogMessage("Upload video", null, "Video is not uploaded successfully!", Alert.AlertType.ERROR);
-
-            selectedFile = null;
-            setDefaultStringValues();
-            updateVideoList();//temp
-        }catch (Exception ex){
-            ScreenUtils.showDialogMessage("Upload video", null, "Video is not upload successfully!", Alert.AlertType.ERROR);
-            throw new RuntimeException(ex);
-        }
-    }
-
-    private void setDefaultStringValues() {
-        lbl_file_name.setText("File name:");
-        lbl_file_path.setText("File path:");
-        lbl_file_size.setText("File size:");
-        lbl_uploader.setText("Uploader:");
-        txt_video_title.setText("");
-
-    }
-
-
-    private void openVideoFile() {
-        FileChooser fileChooser = new FileChooser();
-        fileChooser.setTitle("Open Video File");
-
-        fileChooser.getExtensionFilters().addAll(
-                new FileChooser.ExtensionFilter("Video Files", "*.mp4", "*.mkv", "*.avi"),
-                new FileChooser.ExtensionFilter("All Files", "*.*")
-        );
-
-
-        selectedFile = fileChooser.showOpenDialog(this.stage);
-        String videoPath;
-        if (selectedFile != null) {
-            lbl_file_name.setText("File name: " + selectedFile.getName());
-            videoPath = selectedFile.getAbsolutePath();
-            lbl_file_path.setText("File path: " + videoPath);
-            long file_size_mb = Math.round((float) selectedFile.length() / (1024*1024));
-            lbl_file_size.setText("File size: " + file_size_mb + "MB");
-            lbl_uploader.setText("Uploader: " + this.user.getUsername());
-
-        } else {
-            setDefaultStringValues();
-        }
-
     }
 
     private void updateVideoList() throws Exception {
 
         listOfVideos = MainScreenService.getAllVideos(this.clientSocket);
-        //ObservableList<Video> videos = FXCollections.observableArrayList(listOfVideos);
 
-        //videoList.setItems(videos);
-
-        VideoContainer vc = new VideoContainer();
         for(Video video : listOfVideos){
-            System.out.println(video.getVideoTitle());
             if(video.getVideoTitle() != null)
-                vbVideoList.getChildren().add(vc.getContainer(video.getVideoTitle()));
+                videoBox.getChildren().add(createVideoContainer(video.getVideoId(), video.getVideoTitle()));
         }
 
     }
+    private HBox createVideoContainer(String videoId, String title) throws IOException {
+        FXMLLoader loader = new FXMLLoader(VideoContainer.class.getResource("/fxml_files/video_container.fxml"));
 
-    private void openVideoPlayer(String hostname, String videoId){
-            try {
-                PeerServer.getPeerIps(videoId, clientSocket);
-                ScreenUtils.setStageDisabled(stage, true);
+        HBox root = loader.load();
+        VideoContainer vc = loader.getController();
+        vc.initialize(this.clientSocket, this.stage, videoId);
 
-                Task<Void> playVideo = new Task<>() {
-                    @Override
-                    protected Void call() throws Exception {
-                        ProcessBuilder pb = new ProcessBuilder(
-                                "npm",
-                                "start",
-                                "--prefix",
-                                "src/main/resources/video_player/electron-media-player",
-                                "192.168.1.101",
-                                videoId);
+        Label lblTitle = (Label) root.lookup("#videoTitle");
 
-                        pb.redirectOutput(new File("src/main/resources/video_player" + "/player_msg.log"));
-                        pb.redirectError(new File("src/main/resources/video_player" + "/player_error.log"));
+        if(lblTitle != null)
+            lblTitle.setText(title);
+        else
+            System.err.println("Label was not found");
 
-                        Process process = pb.start();
-                        int exitCode = process.waitFor();
 
-                        if(exitCode == 0)
-                            System.out.println("Player is closed!");
-                        else
-                            System.err.println("There is problem with starting player");
-                        return null;
-                    }
-                };
-
-                playVideo.setOnSucceeded(_ -> ScreenUtils.setStageDisabled(stage, false));
-                playVideo.setOnFailed(_ -> ScreenUtils.setStageDisabled(stage, false));
-
-                Thread thread = new Thread(playVideo);
-                thread.setDaemon(true);
-                thread.start();
-
-            } catch (Exception ex) {
-                throw new RuntimeException(ex);
-            }
-
+        return root;
     }
+
+
 }
