@@ -2,6 +2,7 @@ package domain;
 import java.io.Serial;
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.Objects;
 
 
 public class Video
@@ -81,4 +82,13 @@ private static final long serialVersionUID = 1L;
     public String toString() {
         return videoTitle;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof VideoChunk that)) return false;
+        return videoId.equals(that.getVideoId());
+    }
+
+
 }
