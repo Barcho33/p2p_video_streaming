@@ -1,5 +1,6 @@
 package database;
 
+import domain.Thumbnail;
 import domain.Video;
 
 import java.sql.*;
@@ -72,6 +73,23 @@ public class DatabaseBroker {
 
         return false;
     }
+    public boolean saveThumbnail(String videoId, byte[] imageData) {
+        String query = "INSERT INTO thumbnail VALUES (?, ?)";
+
+        try(Connection conn = DriverManager.getConnection(URL, USER, PASSWORD);
+            PreparedStatement preparedStatement = conn.prepareStatement(query)){
+
+            preparedStatement.setString(1, videoId);
+            preparedStatement.setBytes(2, imageData);
+
+            return preparedStatement.executeUpdate() > 0;
+
+        }catch (Exception ex){
+            System.err.println(ex.getMessage());
+        }
+
+        return false;
+    }
 
     public List<Video> getAllVideos() {
         String query = "SELECT * FROM video";
@@ -96,6 +114,33 @@ public class DatabaseBroker {
                 }
 
                 return videoList;
+
+        }catch (SQLException ex){
+            System.err.println(ex.getMessage());
+        }
+
+        return null;
+    }
+
+    public List<Thumbnail> getAllThumbnails() {
+        String query = "SELECT * FROM thumbnail";
+
+        try(Connection conn = DriverManager.getConnection(URL, USER, PASSWORD);
+            Statement stmt = conn.createStatement()){
+
+            ResultSet rs = stmt.executeQuery(query);
+            List<Thumbnail> thumbnailsList = new ArrayList<>();
+
+            while (rs.next()){
+                Thumbnail thumbnail = new Thumbnail(
+                        rs.getString("videoId"),
+                        rs.getBytes("image")
+                );
+
+                thumbnailsList.add(thumbnail);
+            }
+
+            return thumbnailsList;
 
         }catch (SQLException ex){
             System.err.println(ex.getMessage());

@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
 
 import Communication.*;
+import domain.Thumbnail;
 import domain.Video;
 
 public class ClientHandler implements Runnable{
@@ -47,11 +48,17 @@ public class ClientHandler implements Runnable{
                     case Operations.UPLOAD_VIDEO:
                         controller.sendVideo((Video) request.getArgument());
                         break;
+                    case Operations.SAVE_THUMBNAIL:
+                        controller.sendThumbnail((Thumbnail) request.getArgument());
+                        break;
                     case Operations.PEER_HANDSHAKE:
                         savePeerHandshakeData(request);
                         break;
                     case Operations.FETCH_ALL_VIDEOS:
                         controller.sendAllVideos();
+                        break;
+                    case Operations.FETCH_ALL_THUMBNAILS:
+                        controller.getAllThumbnails();
                         break;
                     case Operations.FETCH_PEER_IPS:
                         sendPeersIpListForVideo((String) request.getArgument());

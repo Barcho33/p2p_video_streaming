@@ -6,6 +6,7 @@ import java.util.List;
 
 import Communication.Response;
 import Communication.Sender;
+import domain.Thumbnail;
 import domain.Video;
 
 public class DatabaseController {
@@ -77,7 +78,24 @@ public class DatabaseController {
             throw new RuntimeException(ex);
         }
     }
+    public void sendThumbnail(Thumbnail thumbnail){
 
+        try {
+            Response response = null;
+            try {
+                boolean result = dbb.saveThumbnail(thumbnail.getVideoId(), thumbnail.getImageData());
+                response = new Response(result, null);
+            } catch (Exception ex) {
+                response = new Response(null, ex);
+                throw new RuntimeException(ex);
+            }finally {
+                sender.send(response);
+            }
+
+        } catch (Exception ex) {
+            throw new RuntimeException(ex);
+        }
+    }
     public void sendAllVideos(){
 
 
@@ -101,5 +119,23 @@ public class DatabaseController {
 
     public List<Video> getAllVideos(){
         return dbb.getAllVideos();
+    }
+
+    public void getAllThumbnails() {
+        try {
+            Response response = null;
+            try {
+                List<Thumbnail> thumbnailsList = dbb.getAllThumbnails();
+                response = new Response(thumbnailsList, null);
+            } catch (Exception ex) {
+                response = new Response(null, ex);
+                throw new RuntimeException(ex);
+            }finally {
+                sender.send(response);
+            }
+
+        } catch (Exception ex) {
+            throw new RuntimeException(ex);
+        }
     }
 }
