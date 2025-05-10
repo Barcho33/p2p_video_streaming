@@ -1,0 +1,65 @@
+ffmpeg version 4.4.2-0ubuntu0.22.04.1 Copyright (c) 2000-2021 the FFmpeg developers
+  built with gcc 11 (Ubuntu 11.2.0-19ubuntu1)
+  configuration: --prefix=/usr --extra-version=0ubuntu0.22.04.1 --toolchain=hardened --libdir=/usr/lib/x86_64-linux-gnu --incdir=/usr/include/x86_64-linux-gnu --arch=amd64 --enable-gpl --disable-stripping --enable-gnutls --enable-ladspa --enable-libaom --enable-libass --enable-libbluray --enable-libbs2b --enable-libcaca --enable-libcdio --enable-libcodec2 --enable-libdav1d --enable-libflite --enable-libfontconfig --enable-libfreetype --enable-libfribidi --enable-libgme --enable-libgsm --enable-libjack --enable-libmp3lame --enable-libmysofa --enable-libopenjpeg --enable-libopenmpt --enable-libopus --enable-libpulse --enable-librabbitmq --enable-librubberband --enable-libshine --enable-libsnappy --enable-libsoxr --enable-libspeex --enable-libsrt --enable-libssh --enable-libtheora --enable-libtwolame --enable-libvidstab --enable-libvorbis --enable-libvpx --enable-libwebp --enable-libx265 --enable-libxml2 --enable-libxvid --enable-libzimg --enable-libzmq --enable-libzvbi --enable-lv2 --enable-omx --enable-openal --enable-opencl --enable-opengl --enable-sdl2 --enable-pocketsphinx --enable-librsvg --enable-libmfx --enable-libdc1394 --enable-libdrm --enable-libiec61883 --enable-chromaprint --enable-frei0r --enable-libx264 --enable-shared
+  WARNING: library configuration mismatch
+  avcodec     configuration: --prefix=/usr --extra-version=0ubuntu0.22.04.1 --toolchain=hardened --libdir=/usr/lib/x86_64-linux-gnu --incdir=/usr/include/x86_64-linux-gnu --arch=amd64 --enable-gpl --disable-stripping --enable-gnutls --enable-ladspa --enable-libaom --enable-libass --enable-libbluray --enable-libbs2b --enable-libcaca --enable-libcdio --enable-libcodec2 --enable-libdav1d --enable-libflite --enable-libfontconfig --enable-libfreetype --enable-libfribidi --enable-libgme --enable-libgsm --enable-libjack --enable-libmp3lame --enable-libmysofa --enable-libopenjpeg --enable-libopenmpt --enable-libopus --enable-libpulse --enable-librabbitmq --enable-librubberband --enable-libshine --enable-libsnappy --enable-libsoxr --enable-libspeex --enable-libsrt --enable-libssh --enable-libtheora --enable-libtwolame --enable-libvidstab --enable-libvorbis --enable-libvpx --enable-libwebp --enable-libx265 --enable-libxml2 --enable-libxvid --enable-libzimg --enable-libzmq --enable-libzvbi --enable-lv2 --enable-omx --enable-openal --enable-opencl --enable-opengl --enable-sdl2 --enable-pocketsphinx --enable-librsvg --enable-libmfx --enable-libdc1394 --enable-libdrm --enable-libiec61883 --enable-chromaprint --enable-frei0r --enable-libx264 --enable-shared --enable-version3 --disable-doc --disable-programs --enable-libaribb24 --enable-libopencore_amrnb --enable-libopencore_amrwb --enable-libtesseract --enable-libvo_amrwbenc --enable-libsmbclient
+  libavutil      56. 70.100 / 56. 70.100
+  libavcodec     58.134.100 / 58.134.100
+  libavformat    58. 76.100 / 58. 76.100
+  libavdevice    58. 13.100 / 58. 13.100
+  libavfilter     7.110.100 /  7.110.100
+  libswscale      5.  9.100 /  5.  9.100
+  libswresample   3.  9.100 /  3.  9.100
+  libpostproc    55.  9.100 / 55.  9.100
+Input #0, matroska,webm, from '/home/baro/Videos/testarone.mkv':
+  Metadata:
+    ENCODER         : Lavf58.76.100
+  Duration: 00:11:47.68, start: 0.000000, bitrate: 405 kb/s
+  Stream #0:0: Video: h264 (High), yuv420p(tv, bt709, progressive), 1920x1080 [SAR 1:1 DAR 16:9], 30.30 fps, 30 tbr, 1k tbn, 60 tbc (default)
+    Metadata:
+      DURATION        : 00:11:47,634000000
+  Stream #0:1: Audio: vorbis, 48000 Hz, stereo, fltp (default)
+    Metadata:
+      DURATION        : 00:11:47,681000000
+Stream mapping:
+  Stream #0:0 -> #0:0 (copy)
+  Stream #0:1 -> #0:1 (vorbis (native) -> aac (native))
+Press [q] to stop, [?] for help
+Output #0, hls, to '/home/baro/Desktop/MyProjects/NULEUSTREAM/Peer/src/main/resources/video_storage/e384c731-8977-474b-9c35-f1f4f8358f70/playlist.m3u8':
+  Metadata:
+    encoder         : Lavf58.76.100
+  Stream #0:0: Video: h264 (High), yuv420p(tv, bt709, progressive), 1920x1080 [SAR 1:1 DAR 16:9], q=2-31, 30.30 fps, 30 tbr, 90k tbn, 30 tbc (default)
+    Metadata:
+      DURATION        : 00:11:47,634000000
+  Stream #0:1: Audio: aac (LC), 48000 Hz, stereo, fltp, 192 kb/s (default)
+    Metadata:
+      DURATION        : 00:11:47,681000000
+      encoder         : Lavc58.134.100 aac
+[hls @ 0x55fb0f1e0880] Non-monotonous DTS in output stream 0:0; previous: 0, current: 0; changing to 1. This may result in incorrect timestamps in the output file.
+frame=    3 fps=0.0 q=-1.0 size=N/A time=00:00:00.03 bitrate=N/A speed=1.52e+03x    frame= 1027 fps=0.0 q=-1.0 size=N/A time=00:00:34.16 bitrate=N/A speed=68.3x    [hls @ 0x55fb0f1e0880] Opening '/home/baro/Desktop/MyProjects/NULEUSTREAM/Peer/src/main/resources/video_storage/e384c731-8977-474b-9c35-f1f4f8358f70/playlist0.ts' for writing
+[hls @ 0x55fb0f1e0880] Opening '/home/baro/Desktop/MyProjects/NULEUSTREAM/Peer/src/main/resources/video_storage/e384c731-8977-474b-9c35-f1f4f8358f70/playlist1.ts' for writing
+frame= 1940 fps=1939 q=-1.0 size=N/A time=00:01:04.60 bitrate=N/A speed=64.6x    frame= 2805 fps=1870 q=-1.0 size=N/A time=00:01:33.43 bitrate=N/A speed=62.3x    [hls @ 0x55fb0f1e0880] Opening '/home/baro/Desktop/MyProjects/NULEUSTREAM/Peer/src/main/resources/video_storage/e384c731-8977-474b-9c35-f1f4f8358f70/playlist2.ts' for writing
+[hls @ 0x55fb0f1e0880] Opening '/home/baro/Desktop/MyProjects/NULEUSTREAM/Peer/src/main/resources/video_storage/e384c731-8977-474b-9c35-f1f4f8358f70/playlist3.ts' for writing
+frame= 3852 fps=1925 q=-1.0 size=N/A time=00:02:08.33 bitrate=N/A speed=64.1x    [hls @ 0x55fb0f1e0880] Opening '/home/baro/Desktop/MyProjects/NULEUSTREAM/Peer/src/main/resources/video_storage/e384c731-8977-474b-9c35-f1f4f8358f70/playlist4.ts' for writing
+frame= 5514 fps=2205 q=-1.0 size=N/A time=00:03:03.73 bitrate=N/A speed=73.5x    [hls @ 0x55fb0f1e0880] Opening '/home/baro/Desktop/MyProjects/NULEUSTREAM/Peer/src/main/resources/video_storage/e384c731-8977-474b-9c35-f1f4f8358f70/playlist5.ts' for writing
+[hls @ 0x55fb0f1e0880] Opening '/home/baro/Desktop/MyProjects/NULEUSTREAM/Peer/src/main/resources/video_storage/e384c731-8977-474b-9c35-f1f4f8358f70/playlist6.ts' for writing
+frame= 6559 fps=2186 q=-1.0 size=N/A time=00:03:38.56 bitrate=N/A speed=72.8x    [hls @ 0x55fb0f1e0880] Opening '/home/baro/Desktop/MyProjects/NULEUSTREAM/Peer/src/main/resources/video_storage/e384c731-8977-474b-9c35-f1f4f8358f70/playlist7.ts' for writing
+frame= 7567 fps=2161 q=-1.0 size=N/A time=00:04:12.16 bitrate=N/A speed=  72x    [hls @ 0x55fb0f1e0880] Opening '/home/baro/Desktop/MyProjects/NULEUSTREAM/Peer/src/main/resources/video_storage/e384c731-8977-474b-9c35-f1f4f8358f70/playlist8.ts' for writing
+frame= 8586 fps=2146 q=-1.0 size=N/A time=00:04:46.13 bitrate=N/A speed=71.5x    [hls @ 0x55fb0f1e0880] Opening '/home/baro/Desktop/MyProjects/NULEUSTREAM/Peer/src/main/resources/video_storage/e384c731-8977-474b-9c35-f1f4f8358f70/playlist9.ts' for writing
+frame= 9610 fps=2135 q=-1.0 size=N/A time=00:05:20.26 bitrate=N/A speed=71.1x    [hls @ 0x55fb0f1e0880] Opening '/home/baro/Desktop/MyProjects/NULEUSTREAM/Peer/src/main/resources/video_storage/e384c731-8977-474b-9c35-f1f4f8358f70/playlist10.ts' for writing
+[hls @ 0x55fb0f1e0880] Opening '/home/baro/Desktop/MyProjects/NULEUSTREAM/Peer/src/main/resources/video_storage/e384c731-8977-474b-9c35-f1f4f8358f70/playlist11.ts' for writing
+[hls @ 0x55fb0f1e0880] Opening '/home/baro/Desktop/MyProjects/NULEUSTREAM/Peer/src/main/resources/video_storage/e384c731-8977-474b-9c35-f1f4f8358f70/playlist12.ts' for writing
+frame=11959 fps=2391 q=-1.0 size=N/A time=00:06:38.56 bitrate=N/A speed=79.7x    [hls @ 0x55fb0f1e0880] Opening '/home/baro/Desktop/MyProjects/NULEUSTREAM/Peer/src/main/resources/video_storage/e384c731-8977-474b-9c35-f1f4f8358f70/playlist13.ts' for writing
+frame=12959 fps=2356 q=-1.0 size=N/A time=00:07:11.90 bitrate=N/A speed=78.5x    [hls @ 0x55fb0f1e0880] Opening '/home/baro/Desktop/MyProjects/NULEUSTREAM/Peer/src/main/resources/video_storage/e384c731-8977-474b-9c35-f1f4f8358f70/playlist14.ts' for writing
+frame=13940 fps=2323 q=-1.0 size=N/A time=00:07:44.60 bitrate=N/A speed=77.4x    [hls @ 0x55fb0f1e0880] Opening '/home/baro/Desktop/MyProjects/NULEUSTREAM/Peer/src/main/resources/video_storage/e384c731-8977-474b-9c35-f1f4f8358f70/playlist15.ts' for writing
+frame=14943 fps=2298 q=-1.0 size=N/A time=00:08:18.03 bitrate=N/A speed=76.6x    [hls @ 0x55fb0f1e0880] Opening '/home/baro/Desktop/MyProjects/NULEUSTREAM/Peer/src/main/resources/video_storage/e384c731-8977-474b-9c35-f1f4f8358f70/playlist16.ts' for writing
+frame=15941 fps=2276 q=-1.0 size=N/A time=00:08:51.30 bitrate=N/A speed=75.9x    [hls @ 0x55fb0f1e0880] Opening '/home/baro/Desktop/MyProjects/NULEUSTREAM/Peer/src/main/resources/video_storage/e384c731-8977-474b-9c35-f1f4f8358f70/playlist17.ts' for writing
+frame=16698 fps=2226 q=-1.0 size=N/A time=00:09:16.53 bitrate=N/A speed=74.2x    [hls @ 0x55fb0f1e0880] Opening '/home/baro/Desktop/MyProjects/NULEUSTREAM/Peer/src/main/resources/video_storage/e384c731-8977-474b-9c35-f1f4f8358f70/playlist18.ts' for writing
+frame=17458 fps=2181 q=-1.0 size=N/A time=00:09:41.86 bitrate=N/A speed=72.7x    [hls @ 0x55fb0f1e0880] Opening '/home/baro/Desktop/MyProjects/NULEUSTREAM/Peer/src/main/resources/video_storage/e384c731-8977-474b-9c35-f1f4f8358f70/playlist19.ts' for writing
+frame=18159 fps=2136 q=-1.0 size=N/A time=00:10:05.23 bitrate=N/A speed=71.2x    [hls @ 0x55fb0f1e0880] Opening '/home/baro/Desktop/MyProjects/NULEUSTREAM/Peer/src/main/resources/video_storage/e384c731-8977-474b-9c35-f1f4f8358f70/playlist20.ts' for writing
+frame=19065 fps=2118 q=-1.0 size=N/A time=00:10:35.43 bitrate=N/A speed=70.6x    [hls @ 0x55fb0f1e0880] Opening '/home/baro/Desktop/MyProjects/NULEUSTREAM/Peer/src/main/resources/video_storage/e384c731-8977-474b-9c35-f1f4f8358f70/playlist21.ts' for writing
+frame=19841 fps=2088 q=-1.0 size=N/A time=00:11:01.30 bitrate=N/A speed=69.6x    frame=20643 fps=2063 q=-1.0 size=N/A time=00:11:28.03 bitrate=N/A speed=68.8x    [hls @ 0x55fb0f1e0880] Opening '/home/baro/Desktop/MyProjects/NULEUSTREAM/Peer/src/main/resources/video_storage/e384c731-8977-474b-9c35-f1f4f8358f70/playlist22.ts' for writing
+[hls @ 0x55fb0f1e0880] Opening '/home/baro/Desktop/MyProjects/NULEUSTREAM/Peer/src/main/resources/video_storage/e384c731-8977-474b-9c35-f1f4f8358f70/playlist23.ts' for writing
+frame=21230 fps=2064 q=-1.0 Lsize=N/A time=00:11:47.67 bitrate=N/A speed=68.8x    
+video:26578kB audio:14366kB subtitle:0kB other streams:0kB global headers:0kB muxing overhead: unknown
+[aac @ 0x55fb0f1cb440] Qavg: 11721.554

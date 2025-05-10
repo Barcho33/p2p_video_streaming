@@ -48,7 +48,7 @@ public class LoginScreenService {
     public static void showScreen(Stage primaryStage, Socket clientSocket){
         try{
 
-            FXMLLoader loader = ScreenUtils.openNewScene("/fxml_files/login_screen.fxml", "Login", primaryStage);
+            FXMLLoader loader = ScreenUtils.openNewScene("/fxml_files/login_screen.fxml", "", primaryStage);
             primaryStage.show();
 
             LoginScreen loginScreen = ScreenUtils.getController(loader);

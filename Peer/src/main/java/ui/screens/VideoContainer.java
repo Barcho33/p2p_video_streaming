@@ -3,9 +3,11 @@ package ui.screens;
 import javafx.animation.TranslateTransition;
 import javafx.concurrent.Task;
 import javafx.fxml.FXML;
+import javafx.scene.control.ProgressBar;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import logic.screen.MainScreenService;
 import logic.screen.ScreenUtils;
 import peer_server.PeerServer;
 
@@ -18,14 +20,22 @@ public class VideoContainer {
     private Socket clientSocket;
     private Stage mainStage;
     private String videoId;
+    private MainScreen mainScreenController;
 
-    public void initialize(Socket clientSocket, Stage mainStage, String videoId){
+    public void initialize(Socket clientSocket, Stage mainStage, String videoId, MainScreen mainScreenController){
         this.clientSocket = clientSocket;
         this.mainStage = mainStage;
         this.videoId = videoId;
+        this.mainScreenController = mainScreenController;
     }
     @FXML
     private HBox videoContainer;
+    @FXML
+    private ProgressBar progressBar;
+
+    public void setProgressBar(double value){
+        this.progressBar.setProgress(value);
+    }
 
     @FXML
     private void handleHoverIn(){
@@ -70,8 +80,22 @@ public class VideoContainer {
                 }
             };
 
-            playVideo.setOnSucceeded(_ -> ScreenUtils.setStageDisabled(this.mainStage, false));
-            playVideo.setOnFailed(_ -> ScreenUtils.setStageDisabled(this.mainStage, false));
+            playVideo.setOnSucceeded(_ -> {
+                ScreenUtils.setStageDisabled(this.mainStage, false);
+                try {
+                    mainScreenController.refreshMainScreen();
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
+                }
+            });
+            playVideo.setOnFailed(_ -> {
+                ScreenUtils.setStageDisabled(this.mainStage, false);
+                try {
+                    mainScreenController.refreshMainScreen();
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
+                }
+            });
 
             Thread thread = new Thread(playVideo);
             thread.setDaemon(true);

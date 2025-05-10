@@ -42,7 +42,7 @@ public class LoginScreen {
     private void handleHoverIn(){
         String currentStyle = btnNext.getStyle();
         String updatedStyle = currentStyle.replaceAll(  "-fx-background-color:.*?;",
-                "-fx-background-color: linear-gradient(to right, #ff8c42, #5fd3e5);");
+                "-fx-background-color: linear-gradient(to right, #d17fb2, #9254c9);");
         btnNext.setStyle(updatedStyle);
     }
     @FXML

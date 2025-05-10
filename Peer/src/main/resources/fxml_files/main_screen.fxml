@@ -8,6 +8,9 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.Stop?>
 <?import javafx.scene.text.Font?>
 
 <HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="753.0" prefWidth="1196.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.screens.MainScreen">
@@ -19,7 +22,7 @@
                   <Insets right="5.0" />
                </VBox.margin>
             </ImageView>
-            <Label fx:id="lblHome" prefHeight="36.0" prefWidth="74.0" text="HOME" textFill="WHITE">
+            <Label fx:id="lblHome" onMouseClicked="#handleHome" onMouseEntered="#homeHoverIn" onMouseExited="#homeHoverOut" prefHeight="36.0" prefWidth="74.0" text="HOME" textFill="WHITE">
                <font>
                   <Font name="Ubuntu Mono Bold" size="32.0" />
                </font>
@@ -27,7 +30,7 @@
                   <Insets bottom="20.0" />
                </VBox.margin>
             </Label>
-            <Label fx:id="lblMyVideos" prefHeight="34.0" prefWidth="171.0" text="MY VIDEOS" textFill="WHITE">
+            <Label fx:id="lblMyVideos" onMouseClicked="#handleMyVideos" onMouseEntered="#myVideosHoverIn" onMouseExited="#myVideosHoverOut" prefHeight="34.0" prefWidth="171.0" text="MY VIDEOS" textFill="WHITE">
                <font>
                   <Font name="Ubuntu Mono Bold" size="32.0" />
                </font>
@@ -38,7 +41,7 @@
                   <Insets left="5.0" />
                </padding>
             </Label>
-            <Label fx:id="lblUploadVideo" prefHeight="34.0" prefWidth="197.0" text="UPLOAD VIDEO" textFill="WHITE">
+            <Label fx:id="lblUploadVideo" onMouseClicked="#handleUpload" onMouseEntered="#uploadHoverIn" onMouseExited="#uploadHoverOut" prefHeight="34.0" prefWidth="197.0" text="UPLOAD VIDEO" textFill="WHITE">
                <font>
                   <Font name="Ubuntu Mono Bold" size="32.0" />
                </font>
@@ -47,14 +50,43 @@
       </VBox>
       <VBox prefHeight="746.0" prefWidth="950.0" HBox.hgrow="ALWAYS">
          <children>
-            <HBox minHeight="-Infinity" minWidth="-Infinity" prefHeight="85.0" prefWidth="949.0" VBox.vgrow="NEVER">
+            <HBox fx:id="horizontalMenu" minHeight="-Infinity" minWidth="-Infinity" prefHeight="85.0" prefWidth="949.0" VBox.vgrow="NEVER">
                <children>
+                  <Label fx:id="lblVideoLibrary" prefHeight="49.0" prefWidth="451.0" text="My Video Library">
+                     <font>
+                        <Font name="Ubuntu Mono Bold Italic" size="47.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets left="15.0" top="20.0" />
+                     </HBox.margin>
+                     <textFill>
+                        <LinearGradient endX="1.0" endY="0.6285714285714286">
+                           <stops>
+                              <Stop>
+                                 <color>
+                                    <Color red="0.250980406999588" green="0.21568627655506134" blue="0.21568627655506134" />
+                                 </color>
+                              </Stop>
+                              <Stop offset="0.006711409395973154">
+                                 <color>
+                                    <Color red="0.6431372761726379" green="0.3137255012989044" blue="0.545098066329956" />
+                                 </color>
+                              </Stop>
+                              <Stop offset="1.0">
+                                 <color>
+                                    <Color red="0.37254902720451355" green="0.03921568766236305" blue="0.529411792755127" />
+                                 </color>
+                              </Stop>
+                           </stops>
+                        </LinearGradient>
+                     </textFill>
+                  </Label>
                   <TextField fx:id="txtSearch" prefHeight="35.0" prefWidth="527.0" style="-fx-background-radius: 20;">
                      <HBox.margin>
                         <Insets left="20.0" top="25.0" />
                      </HBox.margin>
                   </TextField>
-                  <Button fx:id="btnSearch" mnemonicParsing="false" prefHeight="45.0" prefWidth="143.0" style="-fx-background-color: linear-gradient(to right, #a4508b, #5f0a87); -fx-background-radius: 20;" text="Search" textFill="WHITE">
+                  <Button fx:id="btnSearch" mnemonicParsing="false" onMouseEntered="#searchHoverIn" onMouseExited="#searchHoverOut" prefHeight="45.0" prefWidth="143.0" style="-fx-background-color: linear-gradient(to right, #a4508b, #5f0a87); -fx-background-radius: 20;" text="Search" textFill="WHITE">
                      <HBox.margin>
                         <Insets left="20.0" top="20.0" />
                      </HBox.margin>
