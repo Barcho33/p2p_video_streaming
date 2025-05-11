@@ -81,7 +81,7 @@
                         </LinearGradient>
                      </textFill>
                   </Label>
-                  <TextField fx:id="txtSearch" prefHeight="35.0" prefWidth="527.0" style="-fx-background-radius: 20;">
+                  <TextField fx:id="txtSearch" prefHeight="35.0" prefWidth="658.0" style="-fx-background-radius: 20;">
                      <HBox.margin>
                         <Insets left="20.0" top="25.0" />
                      </HBox.margin>

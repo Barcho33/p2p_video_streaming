@@ -81,4 +81,18 @@ public class MainScreenService {
 
         return (List<Thumbnail>) response.getResult();
     }
+
+    public static int numberOfOnlinePeers(String videoId, Socket clientSocket) throws Exception {
+        Sender sender = new Sender(clientSocket);
+        Request request = new Request(Operations.NUMBER_OF_ONLINE_PEERS, videoId);
+        sender.send(request);
+
+        Receiver receiver = new Receiver(clientSocket);
+        Response response = (Response) receiver.receive();
+
+        if(response.getEx() != null)
+            throw response.getEx();
+
+        return (int) response.getResult();
+    }
 }

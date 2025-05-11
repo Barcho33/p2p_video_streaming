@@ -75,7 +75,7 @@
             <Font name="Ubuntu Mono Bold" size="16.0" />
          </font>
       </Button>
-      <Label layoutX="555.0" layoutY="115.0" prefHeight="25.0" prefWidth="346.0" text="Import thumbnail image (optional):" textFill="#d94feb">
+      <Label layoutX="560.0" layoutY="115.0" prefHeight="25.0" prefWidth="346.0" text="Import thumbnail image (optional):" textFill="#d94feb">
          <font>
             <Font name="Ubuntu Mono Bold" size="19.0" />
          </font>
@@ -85,9 +85,9 @@
             <Font name="Ubuntu Mono Bold Italic" size="13.0" />
          </font>
       </Label>
-      <Pane layoutX="555.0" layoutY="149.0" prefHeight="200.0" prefWidth="339.0" style="-fx-border-color: #8DFFD1; -fx-border-width: 5;">
+      <Pane layoutX="560.0" layoutY="150.0" onMouseClicked="#handleThumbnail" prefHeight="200.0" prefWidth="339.0">
          <children>
-            <ImageView fx:id="imgImport" fitHeight="206.0" fitWidth="330.0" layoutX="5.0" onMouseClicked="#handleThumbnail" />
+            <ImageView fx:id="imgImport" fitHeight="215.0" fitWidth="352.0" layoutX="-6.0" layoutY="-7.0" />
          </children>
       </Pane>
       <Label fx:id="lblSize" layoutX="137.0" layoutY="247.0" prefHeight="24.0" prefWidth="409.0" text="lblSize">

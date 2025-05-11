@@ -18,7 +18,9 @@ import logic.screen.UploadScreenService;
 import logic.video.FFmpegUtils;
 import metadata.SQLiteManager;
 
+import java.io.ByteArrayInputStream;
 import java.io.File;
+import java.io.IOException;
 import java.net.Socket;
 
 public class UploadScreen {
@@ -27,6 +29,7 @@ public class UploadScreen {
     private User user;
     private File selectedFile;
     private File selectedImage;
+    private byte[] imageData;
 
     @FXML
     private Button btnChoose;
@@ -64,7 +67,7 @@ public class UploadScreen {
         this.uploadStage.close();
     }
     @FXML
-    private void handleThumbnail(){
+    private void handleThumbnail() throws IOException, InterruptedException {
         openImageFile();
     }
     @FXML
@@ -87,12 +90,10 @@ public class UploadScreen {
         }
 
         try {
-            byte[] imageData;
             if(selectedImage == null)
                 imageData = FFmpegUtils.extractThumbnail(selectedFile.getAbsolutePath());
             else
                 imageData = FFmpegUtils.resizeImageToBytes(selectedImage.getAbsolutePath(), 477, 381);
-
             if (    SQLiteManager.insertUploadedVideo(uploadedVideo)
                     && UploadScreenService.sendVideoToTracker(uploadedVideo, this.clientSocket)
                     && UploadScreenService.sendThumbnailToTracker(new Thumbnail(uploadedVideo.getVideoId(), imageData), this.clientSocket)){
@@ -110,7 +111,7 @@ public class UploadScreen {
             throw new RuntimeException(ex);
         }
     }
-    private void openImageFile(){
+    private void openImageFile() throws IOException, InterruptedException {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Open Image File");
 
@@ -123,7 +124,9 @@ public class UploadScreen {
             this.imgImport.setImage(new Image(getClass().getResource("/images/import-img.png").toExternalForm()));
             return;
         }
-        this.imgImport.setImage(new Image(selectedImage.toURI().toString()));
+        byte[] imagePreview = FFmpegUtils.resizeImageToBytes(selectedImage.getAbsolutePath(), 352, 215);
+
+        this.imgImport.setImage(new Image(new ByteArrayInputStream(imagePreview)));
     }
     private void openVideoFile() {
         FileChooser fileChooser = new FileChooser();

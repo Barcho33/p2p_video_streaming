@@ -1,6 +1,7 @@
 package peer_server;
 
 import Communication.*;
+import domain.Video;
 import metadata.SQLiteManager;
 
 import java.net.Socket;
@@ -29,6 +30,12 @@ public class PeerTrackerCommunication {
             return;
         }
 
+        if(!SQLiteManager.videoExists(videoId)){
+            Video video = getVideoFromTracker(videoId);
+            if(video != null)
+                SQLiteManager.insertVideoData(video);
+
+        }
         if(SQLiteManager.insertSegmentData(videoId, segmentName)) {
             String[] data = {videoId, segmentName};
 
@@ -45,5 +52,16 @@ public class PeerTrackerCommunication {
         }
         else
             System.err.println("Segment insertion error.");
+    }
+
+    private Video getVideoFromTracker(String videoId) throws Exception {
+        Sender sender = new Sender(socket);
+        Request request = new Request(Operations.GET_VIDEO_METADATA, videoId);
+        sender.send(request);
+
+        Receiver receiver = new Receiver(socket);
+        Response response = (Response) receiver.receive();
+
+        return (Video) response.getResult();
     }
 }

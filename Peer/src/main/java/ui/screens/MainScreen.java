@@ -134,7 +134,7 @@ public class MainScreen {
         btnSearch.setStyle(updatedStyle);
     }
     @FXML
-    private void handleMyVideos() throws SQLException, IOException, InterruptedException {
+    private void handleMyVideos() throws Exception {
         showMyVideosPage();
     }
     @FXML
@@ -155,7 +155,7 @@ public class MainScreen {
         }
 
     }
-    private HBox createVideoContainer(Video video) throws IOException, InterruptedException {
+    private HBox createVideoContainer(Video video) throws Exception {
         FXMLLoader loader = new FXMLLoader(VideoContainer.class.getResource("/fxml_files/video_container.fxml"));
 
         HBox root = loader.load();
@@ -170,6 +170,13 @@ public class MainScreen {
             lblTitle.setText(video.getVideoTitle());
         else
             System.err.println("Label was not found");
+        ImageView seedersIcon = (ImageView) root.lookup("#seedersIcon");
+        Label lblSeeders = (Label) root.lookup("#lblSeeders");
+        if(seedersIcon != null && lblSeeders != null){
+            seedersIcon.setImage(new Image(getClass().getResource("/images/seeders-icon.png").toExternalForm()));
+            int numOfPeers = MainScreenService.numberOfOnlinePeers(video.getVideoId(), clientSocket);
+            lblSeeders.setText(numOfPeers + " peers with video segments were recently online.");
+        }
         ImageView videoImage = (ImageView) root.lookup("#videoImage");
         if(videoImage != null && listOfThumbnails != null) {
             if(!listOfThumbnails.isEmpty())
@@ -196,7 +203,7 @@ public class MainScreen {
         updateVideoList();
 
     }
-    private void showMyVideosPage() throws SQLException, IOException, InterruptedException {
+    private void showMyVideosPage() throws Exception {
         lblHome.setStyle("-fx-text-fill: #ffffff;");
         lblUploadVideo.setStyle("-fx-text-fill: #ffffff;");
         lblMyVideos.setStyle("-fx-text-fill: #FF6910;");

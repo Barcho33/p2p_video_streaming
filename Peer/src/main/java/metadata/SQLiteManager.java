@@ -113,6 +113,21 @@ public class SQLiteManager {
             return false;
         }
     }
+    public static boolean videoExists(String videoId) {
+        String query = "SELECT * FROM video WHERE uuid = ?;";
+
+        try (Connection conn = DriverManager.getConnection(URL);
+            PreparedStatement pstmt = conn.prepareStatement(query)) {
+            pstmt.setString(1, videoId);
+
+            ResultSet rs = pstmt.executeQuery();
+            return rs.next();
+
+        } catch (SQLException e) {
+            System.err.println(e.getMessage());
+            return false;
+        }
+    }
 
     public static int insertVideoData(Video video) throws SQLException{
         String query = "INSERT OR IGNORE INTO video VALUES (?, ?, ?, ?, ?, ?)";

@@ -4,6 +4,8 @@ import javafx.animation.TranslateTransition;
 import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.scene.control.ProgressBar;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 import javafx.util.Duration;
@@ -27,11 +29,13 @@ public class VideoContainer {
         this.mainStage = mainStage;
         this.videoId = videoId;
         this.mainScreenController = mainScreenController;
+
     }
     @FXML
     private HBox videoContainer;
     @FXML
     private ProgressBar progressBar;
+
 
     public void setProgressBar(double value){
         this.progressBar.setProgress(value);
