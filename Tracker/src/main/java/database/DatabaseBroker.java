@@ -104,7 +104,7 @@ public class DatabaseBroker {
                     Video video = new Video(
                             rs.getString("uuid"),
                             rs.getString("video_title"),
-                            LocalDateTime.now(),
+                            rs.getTimestamp("upload_date").toLocalDateTime(),
                             rs.getString("uploader"),
                             rs.getLong("size"),
                             rs.getInt("segment_num")
@@ -141,6 +141,35 @@ public class DatabaseBroker {
             }
 
             return thumbnailsList;
+
+        }catch (SQLException ex){
+            System.err.println(ex.getMessage());
+        }
+
+        return null;
+    }
+
+    public Video getVideo(String videoId) {
+        String query = "SELECT * FROM video WHERE uuid = ?";
+
+        try(Connection conn = DriverManager.getConnection(URL, USER, PASSWORD);
+            PreparedStatement pstmt = conn.prepareStatement(query)){
+            pstmt.setString(1, videoId);
+
+            ResultSet rs = pstmt.executeQuery();
+
+            if(rs.next()){
+                Video video = new Video(
+                        rs.getString("uuid"),
+                        rs.getString("video_title"),
+                        rs.getTimestamp("upload_date").toLocalDateTime(),
+                        rs.getString("uploader"),
+                        rs.getLong("size"),
+                        rs.getInt("segment_num")
+                );
+
+                return video;
+            }
 
         }catch (SQLException ex){
             System.err.println(ex.getMessage());

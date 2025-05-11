@@ -60,11 +60,17 @@ public class ClientHandler implements Runnable{
                     case Operations.FETCH_ALL_THUMBNAILS:
                         controller.getAllThumbnails();
                         break;
+                    case Operations.NUMBER_OF_ONLINE_PEERS:
+                        getNumberOfOnlinePeers((String) request.getArgument());
+                        break;
                     case Operations.FETCH_PEER_IPS:
                         sendPeersIpListForVideo((String) request.getArgument());
                         break;
                     case Operations.UPDATE_VIDEO_METADATA:
                         syncVideoMetadata((String []) request.getArgument(), this.clientSocket.getInetAddress().getHostName());
+                        break;
+                    case Operations.GET_VIDEO_METADATA:
+                        controller.getVideo((String) request.getArgument());
                         break;
                     default:
                         throw new AssertionError();
@@ -76,6 +82,36 @@ public class ClientHandler implements Runnable{
             close();
         }
     }
+
+    private void getNumberOfOnlinePeers(String videoId) {
+
+        try {
+            Response response = null;
+            try {
+                List<String> peersList = videoMetadata.get(videoId).get("playlist0.ts");
+                int number;
+                if(peersList == null)
+                    number = 0;
+                else{
+                    if(peersList.contains(clientSocket.getInetAddress().getHostName()))
+                        number = peersList.size() - 1;
+                    else
+                        number = peersList.size();
+                }
+                response = new Response(number, null);
+            } catch (Exception ex) {
+                response = new Response(null, ex);
+                throw new RuntimeException(ex);
+            }finally {
+                Sender sender = new Sender(this.clientSocket);
+                sender.send(response);
+            }
+
+        } catch (Exception ex) {
+            throw new RuntimeException(ex);
+        }
+    }
+
     private void initializeVideoMetadata(Video video){
         int segmentsNum = video.getSegmentNum();
         ConcurrentHashMap<String, List<String>> clientIp = new ConcurrentHashMap<>();

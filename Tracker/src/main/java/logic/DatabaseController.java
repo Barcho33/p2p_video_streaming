@@ -138,4 +138,23 @@ public class DatabaseController {
             throw new RuntimeException(ex);
         }
     }
+
+    public void getVideo(String videoId){
+        try {
+            Response response = null;
+            try {
+                Video video = dbb.getVideo(videoId);
+                response = new Response(video, null);
+            } catch (Exception ex) {
+                response = new Response(null, ex);
+                throw new RuntimeException(ex);
+            }finally {
+                sender.send(response);
+            }
+
+        } catch (Exception ex) {
+            throw new RuntimeException(ex);
+        }
+    }
+
 }
