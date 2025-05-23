@@ -51,8 +51,14 @@ public class ClientHandler implements Runnable{
                     case Operations.SAVE_THUMBNAIL:
                         controller.sendThumbnail((Thumbnail) request.getArgument());
                         break;
-                    case Operations.PEER_HANDSHAKE:
-                        savePeerHandshakeData(request);
+                    case Operations.SAVE_VIDEO_METADATA:
+                        savePeersMetadata(request);
+                        break;
+                    case Operations.DELETE_VIDEO_METADATA:
+                        deletePeersMetadata(request);
+                        break;
+                    case Operations.UPDATE_VIDEO_METADATA:
+                        syncVideoMetadata((String []) request.getArgument(), this.clientSocket.getInetAddress().getHostName());
                         break;
                     case Operations.FETCH_ALL_VIDEOS:
                         controller.sendAllVideos();
@@ -66,9 +72,7 @@ public class ClientHandler implements Runnable{
                     case Operations.FETCH_PEER_IPS:
                         sendPeersIpListForVideo((String) request.getArgument());
                         break;
-                    case Operations.UPDATE_VIDEO_METADATA:
-                        syncVideoMetadata((String []) request.getArgument(), this.clientSocket.getInetAddress().getHostName());
-                        break;
+
                     case Operations.GET_VIDEO_METADATA:
                         controller.getVideo((String) request.getArgument());
                         break;
@@ -80,6 +84,39 @@ public class ClientHandler implements Runnable{
             throw new RuntimeException(ex);
         } finally {
             close();
+        }
+    }
+
+    private void deletePeersMetadata(Request request) {
+        String videoId = (String) request.getArgument();
+        String hostname = clientSocket.getInetAddress().getHostName();
+        //test
+        System.out.println(videoMetadata);
+        //
+        ConcurrentHashMap<String, List<String>> clientIps = videoMetadata.get(videoId);
+        List<String> keyList = new ArrayList<>(clientIps.keySet());
+        for(String segmentName : keyList){
+           List<String> listOfIps = clientIps.get(segmentName);
+           if(listOfIps.contains(hostname))
+               videoMetadata.get(videoId).get(segmentName).remove(hostname);
+        }
+        //test
+        System.out.println(videoMetadata);
+        //
+        try {
+            Response response = null;
+            try {
+                response = new Response(true, null);
+            } catch (Exception ex) {
+                response = new Response(null, ex);
+                throw new RuntimeException(ex);
+            }finally {
+                Sender sender = new Sender(this.clientSocket);
+                sender.send(response);
+            }
+
+        } catch (Exception ex) {
+            throw new RuntimeException(ex);
         }
     }
 
@@ -123,7 +160,7 @@ public class ClientHandler implements Runnable{
         videoMetadata.put(video.getVideoId(), clientIp);
     }
 
-    private void savePeerHandshakeData(Request request) {
+    private void savePeersMetadata(Request request) {
         ConcurrentHashMap<String, List<String>> segments = (ConcurrentHashMap<String, List<String>>) request.getArgument();
 
         List<String> keyList = new ArrayList<>(segments.keySet());
@@ -146,6 +183,7 @@ public class ClientHandler implements Runnable{
         }
 
     }
+
 
     private void sendPeersIpListForVideo(String videoId){
         ConcurrentHashMap<String, List<String>> segments = videoMetadata.get(videoId);

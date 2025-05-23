@@ -86,7 +86,7 @@
                         <Insets left="20.0" top="25.0" />
                      </HBox.margin>
                   </TextField>
-                  <Button fx:id="btnSearch" mnemonicParsing="false" onMouseEntered="#searchHoverIn" onMouseExited="#searchHoverOut" prefHeight="45.0" prefWidth="143.0" style="-fx-background-color: linear-gradient(to right, #a4508b, #5f0a87); -fx-background-radius: 20;" text="Search" textFill="WHITE">
+                  <Button fx:id="btnSearch" mnemonicParsing="false" onMouseClicked="#handleSearch" onMouseEntered="#searchHoverIn" onMouseExited="#searchHoverOut" prefHeight="45.0" prefWidth="143.0" style="-fx-background-color: linear-gradient(to right, #a4508b, #5f0a87); -fx-background-radius: 20;" text="Search" textFill="WHITE">
                      <HBox.margin>
                         <Insets left="20.0" top="20.0" />
                      </HBox.margin>

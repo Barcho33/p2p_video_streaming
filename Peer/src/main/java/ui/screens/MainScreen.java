@@ -40,6 +40,7 @@ public class MainScreen {
     private HttpServer peerServer;
     private static List<Video> listOfVideos;
     private static List<Thumbnail> listOfThumbnails;
+    private boolean currentMainPage;
 
     @FXML
     private Button btnSearch;
@@ -77,6 +78,18 @@ public class MainScreen {
 
         } catch (Exception e) {
             throw new RuntimeException(e);
+        }
+    }
+
+    @FXML
+    private void handleSearch() throws Exception {
+        this.videoBox.getChildren().clear();
+
+        listOfVideos = MainScreenService.getAllVideos(this.clientSocket);
+        listOfThumbnails = MainScreenService.getAllThumbnails(this.clientSocket);
+        for(Video video : listOfVideos){
+            if(video.getVideoTitle() != null && video.getVideoTitle().toLowerCase().contains(txtSearch.getText().toLowerCase()))
+                videoBox.getChildren().add(createVideoContainer(video));
         }
     }
     public void refreshMainScreen() throws Exception {
@@ -160,7 +173,7 @@ public class MainScreen {
 
         HBox root = loader.load();
         VideoContainer vc = loader.getController();
-        vc.initialize(this.clientSocket, this.stage, video.getVideoId(), this);
+        vc.initialize(this.clientSocket, this.stage, videoBox, video.getVideoId(), this, currentMainPage);
         int downloadedSegments = SQLiteManager.getNumOfChunks(video.getVideoId());
         double progress = (double) downloadedSegments / video.getSegmentNum();
         vc.setProgressBar(progress);
@@ -192,6 +205,7 @@ public class MainScreen {
         lblMyVideos.setStyle("-fx-text-fill: #ffffff;");
         lblUploadVideo.setStyle("-fx-text-fill: #ffffff;");
         lblHome.setStyle("-fx-text-fill: #FF6910;");
+        currentMainPage = true;
 
         if(horizontalMenu.getChildren().contains(lblVideoLibrary))
             this.horizontalMenu.getChildren().remove(this.lblVideoLibrary);
@@ -207,7 +221,7 @@ public class MainScreen {
         lblHome.setStyle("-fx-text-fill: #ffffff;");
         lblUploadVideo.setStyle("-fx-text-fill: #ffffff;");
         lblMyVideos.setStyle("-fx-text-fill: #FF6910;");
-
+        currentMainPage = false;
         this.videoBox.getChildren().clear();
 
         if(!horizontalMenu.getChildren().contains(lblVideoLibrary))

@@ -291,4 +291,24 @@ public class SQLiteManager {
     }
 
 
+    public static void deleteVideo(String videoId) {
+        String query = "DELETE FROM video WHERE uuid = ?;";
+
+
+        try (Connection con = DriverManager.getConnection(URL)){
+
+            try (Statement pragmaStmt = con.createStatement()) {
+                pragmaStmt.execute("PRAGMA foreign_keys = ON");
+            }
+
+            try (PreparedStatement stmt = con.prepareStatement(query)) {
+                stmt.setString(1, videoId);
+                stmt.executeUpdate();
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+    }
 }

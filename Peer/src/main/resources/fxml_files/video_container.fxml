@@ -27,7 +27,7 @@
                </VBox.margin>
                <children>
                   <ImageView fx:id="seedersIcon" fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true" />
-                  <Label fx:id="lblSeeders" text="X peers who has video segments was recently online">
+                  <Label fx:id="lblSeeders" prefHeight="16.0" prefWidth="501.0" text="X peers...">
                      <HBox.margin>
                         <Insets left="10.0" top="10.0" />
                      </HBox.margin>
@@ -35,6 +35,11 @@
                         <Font name="Ubuntu Mono Bold Italic" size="15.0" />
                      </font>
                   </Label>
+                  <ImageView fx:id="imgTrash" fitHeight="70.0" fitWidth="70.0" onMouseClicked="#handleRemoveVideo" onMouseEntered="#handleTrashHoverIn" onMouseExited="#handleTrashHoverOut" pickOnBounds="true" preserveRatio="true">
+                     <HBox.margin>
+                        <Insets left="400.0" />
+                     </HBox.margin>
+                  </ImageView>
                </children>
             </HBox>
             <ProgressBar fx:id="progressBar" prefHeight="20.0" prefWidth="1000.0" progress="0.0">

@@ -77,8 +77,8 @@ public class UploadScreen {
             ScreenUtils.showDialogMessage("Video file", null, "You must choose video file!", Alert.AlertType.ERROR);
             return;
         }
-        if(txtVideoTitle == null || txtVideoTitle.getText().isEmpty()){
-            ScreenUtils.showDialogMessage("Video title", null, "You must name your video title!", Alert.AlertType.ERROR);
+        if(txtVideoTitle == null || txtVideoTitle.getText().length() < 3 || txtVideoTitle.getText().length() > 20){
+            ScreenUtils.showDialogMessage("Video title", null, "Video title must be between 2 and 20 characters length", Alert.AlertType.ERROR);
             return;
         }
 

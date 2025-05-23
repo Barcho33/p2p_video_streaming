@@ -18,6 +18,7 @@ import metadata.SQLiteManager;
 
 import java.net.Socket;
 import java.nio.file.Path;
+import java.util.Objects;
 
 public class LoginScreen {
 
@@ -27,7 +28,7 @@ public class LoginScreen {
     public void initialize(Stage stage, Socket clientSocket) {
         this.clientSocket = clientSocket;
         this.stage = stage;
-        this.logo.setImage(new Image(getClass().getResource("/images/logo.png").toExternalForm()));
+        this.logo.setImage(new Image(Objects.requireNonNull(getClass().getResource("/images/logo.png")).toExternalForm()));
 
         stage.setResizable(false);
     }
@@ -55,7 +56,10 @@ public class LoginScreen {
     @FXML
     private void handleLogin() {
         String username = txtUsername.getText();
-
+        if(username.length() < 2 || username.length() > 20){
+            ScreenUtils.showDialogMessage("Username", null, "Username must be between 2 and 20 characters length", Alert.AlertType.ERROR);
+            return;
+        }
         try {
             if(LoginScreenService.checkUsername(username, clientSocket))
                 ScreenUtils.showDialogMessage("Username", null, "Username already exist!", Alert.AlertType.ERROR);

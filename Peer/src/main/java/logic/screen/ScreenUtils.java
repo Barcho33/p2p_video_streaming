@@ -5,6 +5,8 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonBar;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Control;
 import javafx.stage.Stage;
 
@@ -72,7 +74,6 @@ public class ScreenUtils {
             return stage;
 
         } catch (IOException ex) {
-            System.err.println("Get stage error: ");
             throw new RuntimeException(ex.getMessage());
         }
     }
@@ -82,5 +83,19 @@ public class ScreenUtils {
                 control.setDisable(status);
             }
         }
+    }
+
+    public static boolean showYesNoDialog(String title, String header, String content){
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle(title);
+        alert.setHeaderText(header);
+        alert.setContentText(content);
+
+        ButtonType yesButton = new ButtonType("Yes", ButtonBar.ButtonData.YES);
+        ButtonType noButton = new ButtonType("No", ButtonBar.ButtonData.NO);
+
+        alert.getButtonTypes().setAll(yesButton, noButton);
+
+        return alert.showAndWait().filter(response -> response == yesButton).isPresent();
     }
 }
