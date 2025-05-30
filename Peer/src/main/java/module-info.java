@@ -3,7 +3,6 @@ module com.p2p_streaming.client {
     requires jdk.compiler;
     requires Common;
     requires java.sql;
-    requires com.fasterxml.jackson.annotation;
     requires jdk.httpserver;
     requires javafx.web;
     requires javafx.graphics;
