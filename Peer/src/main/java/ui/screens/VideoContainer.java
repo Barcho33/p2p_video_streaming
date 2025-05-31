@@ -118,7 +118,7 @@ public class VideoContainer {
                 }
             };
 
-            playVideo.setOnSucceeded(_ -> {
+            playVideo.setOnSucceeded(event -> {
                 ScreenUtils.setStageDisabled(this.mainStage, false);
                 try {
                     mainScreenController.refreshMainScreen();
@@ -126,7 +126,7 @@ public class VideoContainer {
                     throw new RuntimeException(e);
                 }
             });
-            playVideo.setOnFailed(_ -> {
+            playVideo.setOnFailed(event -> {
                 ScreenUtils.setStageDisabled(this.mainStage, false);
                 try {
                     mainScreenController.refreshMainScreen();

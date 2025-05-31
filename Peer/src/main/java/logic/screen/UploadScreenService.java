@@ -51,11 +51,11 @@ public class UploadScreenService {
             }
         };
 
-        uploadingTask.setOnSucceeded(_ -> {
+        uploadingTask.setOnSucceeded(event -> {
             ScreenUtils.setStageDisabled(stage, false);
             loadingStage.close();
         });
-        uploadingTask.setOnFailed(_ -> {
+        uploadingTask.setOnFailed(event -> {
             ScreenUtils.setStageDisabled(stage, false);
             loadingStage.close();
         });

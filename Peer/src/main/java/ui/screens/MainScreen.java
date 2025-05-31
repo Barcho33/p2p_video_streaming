@@ -255,7 +255,7 @@ public class MainScreen {
         Stage uploadStage = new Stage();
         uploadStage.setTitle("Upload");
         uploadStage.setScene(new Scene(root));
-        uploadStage.setOnHiding(_ -> {
+        uploadStage.setOnHiding(event -> {
             ScreenUtils.setStageDisabled(this.stage, false);
             try {
                 showHomePage();
