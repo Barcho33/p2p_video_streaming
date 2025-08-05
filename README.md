@@ -41,13 +41,8 @@ To run the system, make sure the following dependencies are installed:
 - JavaScript
 - Electron
 - Node.js (`npm`)
-
-## Domain Classes (in Common)
-
-- **User**: Stores user credentials and their list of available videos.
-- **Video**: Represents video metadata like name, duration, and size.
-- **VideoChunk**: Represents segments of a video, associated with a specific video ID.
-- **Thumbnail**: Stores preview image data related to videos.
+- MySQL Server
+- SQLite
 
 ## Typical Workflow
 
@@ -67,6 +62,10 @@ Before running the application, you need to create the required MySQL database a
 Paste the following SQL script in MySQL Workbench (or another MySQL client):
 
 ```
+CREATE DATABASE IF NOT EXISTS peer_to_peer;
+
+USE peer_to_peer;
+
 CREATE TABLE `user` (
   `uuid` VARCHAR(36) NOT NULL,
   `username` VARCHAR(20) NOT NULL,
