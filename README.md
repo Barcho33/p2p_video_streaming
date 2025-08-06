@@ -93,18 +93,18 @@ CREATE TABLE `thumbnail` (
 
 ## Running the Application
 
+### Common
+
+```bash
+mvn clean package
+```
+
 ### Tracker
 
 ```bash
 mvn clean package
 cd target
 java -jar Tracker-1.0-SNAPSHOT.jar
-```
-
-### Common
-
-```bash
-mvn clean package
 ```
 
 ### Peer
